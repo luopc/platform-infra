@@ -1,0 +1,44 @@
+server:
+  port: 8095
+
+# 暴露监控端点 配置
+management:
+  endpoints:
+    # web端点配置属性
+    web:
+      # 默认端点前缀为/actuator，可修改
+      base-path: /actuator
+      exposure:
+        # 包含端点，全用直接使用'*'即可，多个场景['prometheus','health']
+        include: [ 'prometheus','health' ]
+        # 排除端点
+        exclude: [ 'shutdown' ]
+  metrics:
+    tags:
+      application: ${spring.application.name}
+  prometheus:
+    metrics:
+      export:
+        descriptions: true
+        enabled: true
+
+spring:
+  application:
+    name: gateway-service
+    version: '@project.version@'
+  profiles:
+    active: '@profiles.active@'
+    include: nacos
+  cloud:
+    # Spring Cloud Gateway 配置项，对应 GatewayProperties 类
+    gateway:
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: true
+              lower-case-service-id: true
+              url-expression: "'lb://' + serviceId"
+#        - name: Auth
+#          args:
+#            token-header-name: access-token
