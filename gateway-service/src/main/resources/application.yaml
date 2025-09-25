@@ -22,6 +22,23 @@ management:
         descriptions: true
         enabled: true
 
+# springdoc-openapi项目配置
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+    tags-sorter: alpha
+    operations-sorter: alpha
+    show-extensions: true
+    config-url: /v3/api-docs/swagger-config
+    urls:
+      - name: gateway-service
+        url: /v3/api-docs
+  default-flat-param-object: true
+
 spring:
   application:
     name: gateway-service
@@ -34,11 +51,23 @@ spring:
     gateway:
       server:
         webflux:
+          # 添加favicon.ico路由
+          routes:
+            - id: favicon_route
+              predicates:
+                - Path=/favicon.ico
+              filters:
+                - SetStatus=NO_CONTENT
+              uri: no://op
+            # 新增：处理 .well-known 路径的路由
+            - id: well_known_devtools_route
+              predicates:
+                - Path=/.well-known/appspecific/com.chrome.devtools.json
+              filters:
+                - SetStatus=NO_CONTENT
+              uri: no://op
           discovery:
             locator:
               enabled: true
               lower-case-service-id: true
               url-expression: "'lb://' + serviceId"
-#        - name: Auth
-#          args:
-#            token-header-name: access-token

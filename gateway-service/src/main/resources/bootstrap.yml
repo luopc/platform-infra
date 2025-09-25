@@ -1,0 +1,1 @@
+# bootstrap.yml，不是 application.yml，因为 bootstrap 加载优先级比application.yml更高
