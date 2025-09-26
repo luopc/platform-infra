@@ -1,27 +1,6 @@
 server:
   port: 8095
 
-# 暴露监控端点 配置
-management:
-  endpoints:
-    # web端点配置属性
-    web:
-      # 默认端点前缀为/actuator，可修改
-      base-path: /actuator
-      exposure:
-        # 包含端点，全用直接使用'*'即可，多个场景['prometheus','health']
-        include: [ 'prometheus','health' ]
-        # 排除端点
-        exclude: [ 'shutdown' ]
-  metrics:
-    tags:
-      application: ${spring.application.name}
-  prometheus:
-    metrics:
-      export:
-        descriptions: true
-        enabled: true
-
 # springdoc-openapi项目配置
 springdoc:
   api-docs:
@@ -49,9 +28,14 @@ spring:
   cloud:
     # Spring Cloud Gateway 配置项，对应 GatewayProperties 类
     gateway:
+      # 添加favicon.ico路由
       server:
         webflux:
-          # 添加favicon.ico路由
+          discovery:
+            locator:
+              enabled: false
+#              lower-case-service-id: true
+#              url-expression: "'lb://' + serviceId"
           routes:
             - id: favicon_route
               predicates:
@@ -59,15 +43,58 @@ spring:
               filters:
                 - SetStatus=NO_CONTENT
               uri: no://op
-            # 新增：处理 .well-known 路径的路由
+                # 新增：处理 .well-known 路径的路由
             - id: well_known_devtools_route
               predicates:
                 - Path=/.well-known/appspecific/com.chrome.devtools.json
               filters:
                 - SetStatus=NO_CONTENT
               uri: no://op
-          discovery:
-            locator:
-              enabled: true
-              lower-case-service-id: true
-              url-expression: "'lb://' + serviceId"
+            - id: assembly-service
+              predicates:
+                - Path=/assembly-service/**
+              filters:
+                - RewritePath=/assembly-service/(?<remaining>.*), /${remaining}
+              uri: lb://assembly-service
+            - id: example-service
+              predicates:
+                - Path=/example-service/**
+              filters:
+                - RewritePath=/example-service/(?<remaining>.*), /${remaining}
+              uri: lb://example-service
+knife4j:
+  gateway:
+    enabled: true
+    # 指定服务发现的模式聚合微服务文档，并且是默认 default 分组
+    strategy: discover
+    discover:
+      # ③ 第三行配置，开启discover模式
+      enabled: true
+      # ④ 第四行配置，聚合子服务全部为Openapi3规范的文档
+      version: openapi3
+#    routes:
+#      - name: 示例服务
+#        url: /example-service/v3/api-docs?group=default
+#        service-name: example-service
+#        order: 2
+
+# 暴露监控端点 配置
+management:
+  endpoints:
+    # web端点配置属性
+    web:
+      # 默认端点前缀为/actuator，可修改
+      base-path: /actuator
+      exposure:
+        # 包含端点，全用直接使用'*'即可，多个场景['prometheus','health']
+        include: [ 'prometheus','health' ]
+        # 排除端点
+        exclude: [ 'shutdown' ]
+  metrics:
+    tags:
+      application: ${spring.application.name}
+  prometheus:
+    metrics:
+      export:
+        descriptions: true
+        enabled: true
