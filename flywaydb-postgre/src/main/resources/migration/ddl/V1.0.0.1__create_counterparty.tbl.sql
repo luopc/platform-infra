@@ -1,0 +1,25 @@
+DROP TABLE IF EXISTS counterparty;
+CREATE TABLE counterparty(
+     cpty_id SERIAL NOT NULL,
+     revision integer,
+     code varchar(32),
+     full_name varchar(90),
+     full_cn_name varchar(90),
+     business_unit_name varchar(255),
+     counter_party_type varchar(90),
+     parent_cpty_id varchar(32),
+     parent_cpty_code varchar(32),
+     root_cpty_code varchar(32),
+     parent_cpty_name varchar(90),
+     native_ccy varchar(90),
+     margin_type varchar(90),
+     region varchar(90),
+     anonymous varchar(1),
+     created_by varchar(32),
+     created_time timestamp,
+     updated_by varchar(32),
+     updated_time timestamp,
+     activity_status varchar(1) DEFAULT  1,
+     delete_flag varchar(1) DEFAULT  0,
+     PRIMARY KEY (cpty_id)
+);

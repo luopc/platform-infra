@@ -1,0 +1,3 @@
+ALTER TABLE spot_rate
+ALTER COLUMN eod_flag TYPE VARCHAR(8)
+USING eod_flag::VARCHAR(8);
