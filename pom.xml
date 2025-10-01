@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.luopc.platform.infra</groupId>
     <artifactId>platform-infra</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Platform Infra</name>
     <description>Infra modules for platform services</description>
@@ -56,6 +56,6 @@
         <url>https://github.com/luopc/platform-infra/</url>
         <connection>scm:git:https://github.com/luopc/platform-infra</connection>
         <developerConnection>scm:git:https://github.com/luopc/platform-infra</developerConnection>
-        <tag>v1.0.1</tag>
+        <tag>HEAD</tag>
     </scm>
 </project>
