@@ -1,0 +1,23 @@
+server:
+  port: 8052
+
+spring:
+  application:
+    name: eureka-server
+    version: '@project.version@'
+  profiles:
+    active: '@profiles.active@'
+    include: web
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    healthcheck:
+      enabled: false
+    register-with-eureka: false
+    fetch-registry: false
+  server:
+    wait-time-in-ms-when-sync-empty: 300
+    enable-self-preservation: false

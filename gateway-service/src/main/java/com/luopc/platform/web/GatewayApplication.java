@@ -1,9 +1,11 @@
 package com.luopc.platform.web;
 
+import com.luopc.platform.web.config.BootStaticWebMvcConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+
+@SpringBootApplication(exclude = {BootStaticWebMvcConfiguration.class})
 public class GatewayApplication {
 
     public static void main(String[] args) {
