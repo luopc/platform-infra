@@ -5,9 +5,13 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
+import org.apache.ibatis.mapping.DatabaseIdProvider;
+import org.apache.ibatis.mapping.VendorDatabaseIdProvider;
 import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.Properties;
 
 @Configuration
 public class SpringDocAdminConfig {
@@ -38,5 +42,19 @@ public class SpringDocAdminConfig {
                 .build();
     }
 
+    @Bean
+    public DatabaseIdProvider databaseIdProvider() {
+        DatabaseIdProvider databaseIdProvider = new VendorDatabaseIdProvider();
+        Properties p = new Properties();
+        p.setProperty("Oracle", "oracle");
+        p.setProperty("TiDB", "tidb");
+        p.setProperty("PostgreSQL", "postgresql");
+        p.setProperty("DB2", "db2");
+        p.setProperty("SQL Server", "sqlserver");
+        p.setProperty("MySQL", "MySQL");
+        p.setProperty("H2", "H2");
+        databaseIdProvider.setProperties(p);
+        return databaseIdProvider;
+    }
 
 }

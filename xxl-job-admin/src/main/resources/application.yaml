@@ -4,6 +4,8 @@ server:
 
 mybatis:
   mapper-locations: classpath:/mapper/*Mapper.xml
+  configuration:
+    database-id: true
 
 spring:
   # 允许bean定义覆盖
