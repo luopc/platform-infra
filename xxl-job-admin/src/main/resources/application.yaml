@@ -1,0 +1,73 @@
+server:
+  servlet:
+    context-path: /xxl-job-admin
+
+mybatis:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+
+spring:
+  # 允许bean定义覆盖
+  #  main:
+  #    allow-bean-definition-overriding: true
+  application:
+    name: xxl-job-admin
+    version: '@project.version@'
+  profiles:
+    active: '@profiles.active@'
+    include: web,h2
+  mvc:
+    servlet:
+      load-on-startup: 0
+    static-path-pattern: /static/**
+  web:
+    resources:
+      static-locations: classpath:/static/
+  freemarker:
+    templateLoaderPath: classpath:/templates/
+    suffix: .ftl
+    charset: UTF-8
+    request-context-attribute: request
+    settings:
+      number_format: 0.##########
+      new_builtin_class_resolver: safer
+
+
+### xxl-job, access token
+xxl:
+  job:
+    accessToken: 8L7kT/nxlM8NKRg8DfnKHPGdlZ80u3mEnRHPfLtVEI0= # 使用 `  openssl rand -base64 32 ` 生成code替换
+    timeout: 3
+    ### xxl-job, i18n (default is zh_CN, and you can choose "zh_CN", "zh_TC" and "en")
+    i18n: zh_CN
+    triggerpool:
+      fast:
+        max: 300
+      slow:
+        max: 200
+    logretentiondays: 30
+
+xxl-sso:
+  token:
+    key: hxvhxV7rGy2CywAfgK0H3A==
+    timeout: 600000
+  client:
+    excluded:
+      paths: /h2/**,/v3/**,/swagger-ui.html,/swagger-ui/**
+    login:
+      path: /auth/login
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+server:
+  port: 8180
+
+---
+spring:
+  config:
+    activate:
+      on-profile: uat
+server:
+  port: 8180
