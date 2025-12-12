@@ -16,7 +16,7 @@ spring:
     version: '@project.version@'
   profiles:
     active: '@profiles.active@'
-    include: web,h2
+    include: web,mysql
   mvc:
     servlet:
       load-on-startup: 0
@@ -50,7 +50,7 @@ xxl:
 
 xxl-sso:
   token:
-    key: hxvhxV7rGy2CywAfgK0H3A==
+    key: xxl_job_login_token
     timeout: 600000
   client:
     excluded:

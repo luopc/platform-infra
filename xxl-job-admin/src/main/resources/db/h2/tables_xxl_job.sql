@@ -125,8 +125,11 @@ CREATE TABLE xxl_job_user
 
 -- 初始化数据（移除反引号，适配MySQL兼容模式）
 INSERT INTO xxl_job_group(id, app_name, title, address_type, address_list, update_time)
-VALUES (1, 'xxl-job-executor-sample', '通用执行器Sample', 0, NULL, NOW()),
-       (2, 'xxl-job-executor-sample-ai', 'AI执行器Sample', 0, NULL, NOW());
+VALUES (1, 'simple-job-executor', '通用执行器Sample', 0, NULL, NOW()),
+       (2, 'spring-job-executor', 'Spring Job Sample', 0, NULL, NOW()),
+       (3, 'share-job-executor', '分片任务执行器Sample', 0, NULL, NOW()),
+       (4, 'sample-ai-executor', 'AI执行器Sample', 0, NULL, NOW())
+;
 
 INSERT INTO xxl_job_info(id, job_group, job_desc, add_time, update_time, author, alarm_email,
                          schedule_type, schedule_conf, misfire_strategy, executor_route_strategy,
@@ -136,14 +139,14 @@ INSERT INTO xxl_job_info(id, job_group, job_desc, add_time, update_time, author,
 VALUES (1, 1, '示例任务01', NOW(), NOW(), 'XXL', '', 'CRON', '0 0 0 * * ? *',
         'DO_NOTHING', 'FIRST', 'demoJobHandler', '', 'SERIAL_EXECUTION', 0, 0, 'BEAN', '', 'GLUE代码初始化',
         NOW(), ''),
-       (2, 2, 'Ollama示例任务01', NOW(), NOW(), 'XXL', '', 'NONE', '',
+       (2, 4, 'Ollama示例任务01', NOW(), NOW(), 'XXL', '', 'NONE', '',
         'DO_NOTHING', 'FIRST', 'ollamaJobHandler', '{
     "input": "慢SQL问题分析思路",
     "prompt": "你是一个研发工程师，擅长解决技术类问题。",
     "model": "qwen3:0.6b"
 }', 'SERIAL_EXECUTION', 0, 0, 'BEAN', '', 'GLUE代码初始化',
         NOW(), ''),
-       (3, 2, 'Dify示例任务', NOW(), NOW(), 'XXL', '', 'NONE', '',
+       (3, 4, 'Dify示例任务', NOW(), NOW(), 'XXL', '', 'NONE', '',
         'DO_NOTHING', 'FIRST', 'difyWorkflowJobHandler', '{
     "inputs":{
         "input":"查询班级各学科前三名"

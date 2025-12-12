@@ -58,7 +58,7 @@ public class XxlJobAdminBootstrap implements InitializingBean, DisposableBean {
 
     @EventListener(ServletWebServerInitializedEvent.class)
     public void dataSourceInit() throws Exception {
-        System.out.println(">>>>>>>>>>> xxl-job WebServer starting...");
+        logger.info(">>>>>>>>>>> xxl-job WebServer Initialized end...");
         if(!this.shouldInitialize) doStart();
     }
 
