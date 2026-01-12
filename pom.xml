@@ -10,21 +10,22 @@
     <parent>
         <groupId>com.luopc.platform.parent</groupId>
         <artifactId>platform-boot-ai</artifactId>
-        <version>2.10.7</version>
+        <version>2.10.9</version>
     </parent>
     <modules>
         <module>gateway-service</module>
         <module>flywaydb-postgre</module>
         <module>eureka-server</module>
         <module>xxl-job-admin</module>
+        <module>redies-service</module>
     </modules>
 
     <properties>
         <java.version>21</java.version>
         <flyway.core.version>9.22.3</flyway.core.version>
         <flyway.postgresql.version>10.1.0</flyway.postgresql.version>
-        <flyway.mysql.core>8.2.0</flyway.mysql.core> <!-- Extract MySQL after 8.2.1 -->
-        <flyway.mysql.version>8.2.0</flyway.mysql.version> <!-- Extract MySQL after 8.2.1 -->
+        <flyway.mysql.core>8.2.0</flyway.mysql.core>        <!-- Extract MySQL after 8.2.1 -->
+        <flyway.mysql.version>8.2.0</flyway.mysql.version>  <!-- Extract MySQL after 8.2.1 -->
     </properties>
 
     <dependencyManagement>
