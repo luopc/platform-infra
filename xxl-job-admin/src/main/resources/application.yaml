@@ -62,7 +62,20 @@ xxl-sso:
 spring:
   config:
     activate:
+      on-profile: local
+  profiles:
+    include: web, h2
+server:
+  port: 8180
+
+
+---
+spring:
+  config:
+    activate:
       on-profile: dev
+  profiles:
+    include: web, mysql
 server:
   port: 8180
 
@@ -71,5 +84,7 @@ spring:
   config:
     activate:
       on-profile: uat
+  profiles:
+    include: web,mysql
 server:
   port: 8180

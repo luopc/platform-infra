@@ -67,9 +67,9 @@
 
 
     <scm>
-        <url>https://github.com/luopc/platform-infra/</url>
-        <connection>scm:git:https://github.com/luopc/platform-infra</connection>
-        <developerConnection>scm:git:https://github.com/luopc/platform-infra</developerConnection>
+        <url>https://gitee.com/luo_pc/platform-infra/</url>
+        <connection>scm:git@gitee.com:luo_pc/platform-infra.git</connection>
+        <developerConnection>scm:git@gitee.com:luo_pc/platform-infra.git</developerConnection>
         <tag>v1.0.3</tag>
     </scm>
 </project>
