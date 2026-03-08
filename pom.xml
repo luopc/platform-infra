@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.luopc.platform.infra</groupId>
     <artifactId>platform-infra</artifactId>
-    <version>1.0.4-SNAPSHOT</version>
+    <version>1.0.4</version>
     <packaging>pom</packaging>
     <name>Platform Infra</name>
     <description>Infra modules for platform services</description>
@@ -70,6 +70,6 @@
         <url>https://gitee.com/luo_pc/platform-infra/</url>
         <connection>scm:git:git@gitee.com:luo_pc/platform-infra.git</connection>
         <developerConnection>scm:git:git@gitee.com:luo_pc/platform-infra.git</developerConnection>
-        <tag>v1.0.3</tag>
+        <tag>v1.0.4</tag>
     </scm>
 </project>
