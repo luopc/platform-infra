@@ -1,0 +1,63 @@
+# 允许bean定义覆盖
+spring:
+  jackson:
+    time-zone: Asia/Shanghai
+  main:
+    allow-bean-definition-overriding: true
+
+management:
+  metrics:
+    tags:
+      application: ${spring.application.name}
+      #app-version: '@project.version@'
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: [ 'prometheus','health', 'info' ]
+        exclude: [ 'shutdown' ]
+      path-mapping:
+        prometheus: prometheus
+        health: health
+        info: info
+  endpoint:
+    health:
+      show-details: always
+    prometheus:
+      access: read_only
+    info:
+      access: read_only
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+knife4j:
+  gateway:
+    enabled: true
+    tags-sorter: order
+    operations-sorter: order
+    # 指定服务发现的模式聚合微服务文档，并且是默认 default 分组
+    strategy: discover
+    discover:
+      # ③ 第三行配置，开启discover模式
+      enabled: true
+      # ④ 第四行配置，聚合子服务全部为Openapi3规范的文档
+      version: openapi3
+      excluded-services: #exclude gateway-service
+        - ${spring.application.name}
+      service-config:
+        example-service:
+          # 排序
+          order: 1
+          # 前端显示名称
+          group-name: 示例服务
+          # 重新指定basePath，一般在OpenAPI3规范中需要
+          context-path: /admin
+#    routes:
+#      - name: 示例服务
+#        url: /example-service/admin/v3/api-docs?group=default
+#        service-name: example-service
+#        order: 2
+
+
+

@@ -56,12 +56,21 @@
             <version>${knife4j.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.luopc.platform.boot</groupId>
-            <artifactId>common-web</artifactId>
+            <groupId>com.luopc.platform.client</groupId>
+            <artifactId>nacos-client</artifactId>
+        </dependency>
+        <!-- spring boot monitoring -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.luopc.platform.boot.middleware</groupId>
-            <artifactId>nacos-client</artifactId>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.luopc.platform.boot</groupId>
+            <artifactId>common-core</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

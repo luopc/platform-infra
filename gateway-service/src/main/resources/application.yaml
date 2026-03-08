@@ -6,7 +6,7 @@ spring:
     version: '@project.version@'
   profiles:
     active: '@profiles.active@'
-    include: web,nacos
+    include: core, swagger, nacos
   cloud:
     # Spring Cloud Gateway 配置项，对应 GatewayProperties 类
     gateway:
@@ -33,37 +33,23 @@ spring:
               filters:
                 - SetStatus=NO_CONTENT
               uri: no://op
-            - id: assembly-service
-              predicates:
-                - Path=/assembly-service/**
-              filters:
-                - RewritePath=/assembly-service/(?<remaining>.*), /${remaining}
-              uri: lb://assembly-service
-            - id: example-service
-              predicates:
-                - Path=/example-service/**
-              filters:
-                - RewritePath=/example-service/(?<remaining>.*), /${remaining}
-              uri: lb://example-service
-            - id: market-data-service
-              predicates:
-                - Path=/market-data-service/**
-              filters:
-                - RewritePath=/market-data-service/(?<remaining>.*), /${remaining}
-              uri: lb://market-data-service
-knife4j:
-  gateway:
-    enabled: true
-    # 指定服务发现的模式聚合微服务文档，并且是默认 default 分组
-    strategy: discover
-    discover:
-      # ③ 第三行配置，开启discover模式
-      enabled: true
-      # ④ 第四行配置，聚合子服务全部为Openapi3规范的文档
-      version: openapi3
-#    routes:
-#      - name: 示例服务
-#        url: /example-service/v3/api-docs?group=default
-#        service-name: example-service
-#        order: 2
+#            - id: assembly-service
+#              predicates:
+#                - Path=/assembly-service/**
+#              filters:
+#                - RewritePath=/assembly-service/(?<remaining>.*), /${remaining}
+#              uri: lb://assembly-service
+#            - id: example-service
+#              predicates:
+#                - Path=/example-service/**
+#              filters:
+#                - RewritePath=/example-service/(?<remaining>.*), /${remaining}
+#              uri: lb://example-service
+#            - id: market-data-service
+#              predicates:
+#                - Path=/market-data-service/**
+#              filters:
+#                - RewritePath=/market-data-service/(?<remaining>.*), /${remaining}
+#              uri: lb://market-data-service
+
 
