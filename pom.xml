@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.luopc.platform.infra</groupId>
     <artifactId>platform-infra</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Platform Infra</name>
     <description>Infra modules for platform services</description>
